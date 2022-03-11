@@ -72,6 +72,11 @@ server <- shinyServer(function(input, output, session) {
   output$dotplot <- renderPlotly({
     ggplotly(ggplot(Stocks, aes(date, close)) + geom_point(aes(date, close, color = symbol)))
   })
+  interest_stocks2 <- c("AAPL", "MSFT", "GOOG", "AMZN")
+  Stocks2 <- tq_get(interest_stocks, from = start, to = end)
+  output$dotplot1 <- renderPlotly({
+    ggplotly(ggplot(Stocks2, aes(date, close)) + geom_point(aes(date, close, color = symbol)))
+  })
   
   output$dotplot1 <- renderPlotly({
     ggplotly(ggplot(mtcars, aes(wt, mpg))
